@@ -14,15 +14,17 @@ dotenv.config();
 
 app.use((req, res, next) => {
   res.setHeader("Content-Security-Policy", 
-    "default-src 'self'; " +
+    "default-src 'self' http://localhost:5173; " +
     "font-src https://fonts.gstatic.com; " +
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-    "script-src 'self' 'unsafe-inline'; " +
-    "img-src 'self' data:; " +
-    "connect-src 'self' ws: wss:;"
+    "script-src 'self' 'unsafe-inline' http://localhost:5173; " +
+    "img-src 'self' data: blob:; " +
+    "connect-src 'self' ws: wss: http://localhost:5173;"
   );
   next();
 });
+
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
