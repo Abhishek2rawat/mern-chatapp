@@ -10,21 +10,9 @@ import path from "path";
 import {app , server} from "./lib/socket.js";
 
 dotenv.config();
-// const app = express();
 
-// app.use((req, res, next) => {
-//   res.setHeader("Content-Security-Policy", 
-//     "default-src 'self' http://localhost:5173; " +
-//     "font-src https://fonts.gstatic.com; " +
-//     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-//     "script-src 'self' 'unsafe-inline' http://localhost:5173; " +
-//     "img-src 'self' data: blob:; " +
-//     "connect-src 'self' ws: wss: http://localhost:5173;"
-//   );
-//   next();
-// });
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// app.use(express.json({ limit: '10mb' }));
+// app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 app.use(cookieParser());
 app.use(cors({
@@ -47,21 +35,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
-// if (process.env.NODE_ENV === "production") {
-//   const frontendPath = path.join(__dirname, "../frontend/dist");
-//   app.use(express.static(frontendPath));
-
-//   app.get("/*", (req, res) => {
-//     res.sendFile(path.join(frontendPath, "index.html"));
-//   });
-// }
-
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-//   app.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-//   });
 
 server.listen(PORT,()=>{
     console.log(`Server if running on the port ${PORT}`);
